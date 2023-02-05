@@ -6,7 +6,7 @@ export default createStore({
     return {
         userRole: String,
         accesToken: Object,
-        account: Object,
+        account: undefined,
     }
     },
   getters: {

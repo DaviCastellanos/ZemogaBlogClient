@@ -1,18 +1,27 @@
 <template>
 
-<nav class="navbar fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand">Zemoga Blog</a>
-    <span class="greet" v-if="this.account"> {{this.account.name}} </span>
-    <button v-if="!this.account" type="button" class="btn btn-outline-light" @click="signIn()">Log In</button>
-    <button v-if="this.account" type="button" class="btn btn-outline-light" @click="signOut()">Log Out</button>
-</nav>
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand">Zemoga Blog</a>
+        <span class="greet" v-if="this.account"> {{this.account.name}} </span>
+        <button v-if="!this.account" type="button" class="btn btn-outline-light" @click="signIn()">Log In</button>
+        <button v-if="this.account" type="button" class="btn btn-outline-light" @click="signOut()">Log Out</button>
+    </nav>
 
+    <div class="d-flex justify-content-center no-gutters">
+      <router-view />
+    </div>
+    
 </template>
 
 <script>
 
 export default {
   name: 'App',
+  data(){
+    return{
+    posts : undefined
+    }
+  },
   components: {
   },
   computed:{
