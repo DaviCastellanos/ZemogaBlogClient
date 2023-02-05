@@ -1,4 +1,16 @@
+import store from './store'
+import "bootstrap/dist/css/bootstrap.css"
+//import axios from 'axios';
+//import VueAxios from 'vue-axios'
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+//app.use(VueAxios,axios)
+app.use(store)
+app.config.globalProperties.$msalInstance = {};
+
+app.mount('#app')
+
+import "bootstrap/dist/js/bootstrap.js"
