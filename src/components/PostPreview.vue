@@ -1,13 +1,16 @@
 <template>
     <div class="box border-top-0 button" @click="goToDetail()">
         <div class="title">
-            {{ this.title }}
+            {{ this.post.title }}
         </div>
         <div class="header">
-            {{ this.header }}
+            {{ this.post.header }}
         </div>
-        <div class="prev-author">
-            From {{ this.author }}
+        <div v-if="!this.isFromAuthor" class="prev-author">
+            From {{ this.post.authorName }}
+        </div>
+        <div v-if="this.isFromAuthor" class="prev-author">
+            Status is: {{ this.statuses[this.post.status] }}
         </div>
     </div>
 </template>
@@ -16,15 +19,18 @@
 
 export default {
     name: 'PostPreview',
+    data(){
+        return {
+            statuses: ['Wip','Submitted','published']
+        }
+    },
     props: {
-    title: String,
-    author: String,
-    header: String,
-    postId: String
+    post: undefined,
+    isFromAuthor: Boolean,
     },
     methods:{
     goToDetail(){
-        this.$router.push({ path: '/PostDetails', query: { postId: this.postId } })
+        this.$router.push({ path: '/PostDetails', query: { postId: this.post.postId } })
     }
     }
 }

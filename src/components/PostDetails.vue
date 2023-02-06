@@ -11,7 +11,7 @@
             {{ this.post.header }}
         </div>
         <br/>
-        <div class="body">
+        <div class="post-body">
             {{ this.post.body }}
         </div>
         <br/>
@@ -79,6 +79,7 @@ mounted(){
 .box{
     width: 100%;
     padding: 10px;
+    text-align: left;
 }
 .title{
     font-weight: bold;
@@ -91,7 +92,7 @@ mounted(){
     text-align: left;
 }
 
-.body{
+.post-body{
     text-align: left;
     white-space: pre-wrap;
 }

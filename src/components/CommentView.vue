@@ -1,10 +1,10 @@
 <template>
     <div class="box border-top-0 button">
-        <div v-if="comment" class="body">
+        <div v-if="comment" class="comment-body">
             {{ this.comment.body }}
         </div>
 
-        <div v-if="!comment" class="body">
+        <div v-if="!comment" class="comment-body">
             No comments yet
         </div>
     </div>
@@ -24,8 +24,8 @@ export default {
 .box{
     padding: 10px;
 }
-.body{
+.comment-body{
     font-size: normal;
-    text-align: center;
+    text-align: left;
 }
 </style>

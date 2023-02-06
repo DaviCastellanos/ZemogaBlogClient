@@ -17,7 +17,10 @@
                   <span class="greet" v-if="this.account"> {{this.account.name}} </span>
               </li>
               <li class="nav-item">
-                  <span role="button" class="nav-link" @click=" this.$router.push({ path: '/CreatePost'})">My posts</span>
+                  <span role="button" class="nav-link" @click=" this.$router.push({ path: '/CreatePost'})">New post</span>
+              </li>
+              <li class="nav-item">
+                  <span role="button" class="nav-link" @click=" this.$router.push({ path: '/MyPosts'})">My posts</span>
               </li>
               <li class="nav-item">
                   <span role="button" class="nav-link" @click="signOut()">Sign Out</span>
