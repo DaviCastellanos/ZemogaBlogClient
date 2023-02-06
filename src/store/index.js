@@ -4,12 +4,20 @@ import { PublicClientApplication } from '@azure/msal-browser';
 export default createStore({
   state () {
     return {
-        userRoles: String,
-        accesToken: Object,
+        userRoles: undefined,
+        accesToken: undefined,
         account: undefined,
+        userName: undefined,
+        userId: undefined
     }
     },
   getters: {
+    userId(state) {
+        return state.userId;
+    },
+    userName(state) {
+        return state.userName;
+    },
     userRoles(state) {
         return state.userRoles;
     },
@@ -25,8 +33,11 @@ export default createStore({
     },
   mutations: {
     SET_USER(state, silentResult) {
-        this.state.accessToken = silentResult;
-        this.state.userRoles = silentResult.idTokenClaims.roles; 
+        //console.log("silent", silentResult);
+        this.state.accessToken = silentResult.idToken;
+        this.state.userRoles = silentResult.idTokenClaims.roles;
+        this.state.userName = silentResult.idTokenClaims.name;
+        this.state.userId = silentResult.idTokenClaims.oid; 
     },
     },
   actions: {
@@ -66,6 +77,7 @@ export default createStore({
             .then(() => {
             const myAccounts = this.$msalInstance.getAllAccounts();
             this.state.account = myAccounts[0];
+
 
             })
             .catch(error => {
