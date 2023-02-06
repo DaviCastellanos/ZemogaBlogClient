@@ -30,6 +30,11 @@ export default {
     },
     methods:{
     goToDetail(){
+        if(this.isFromAuthor && this.post.status === 0){
+            this.$router.push({ path: '/EditPost', query: { postId: this.post.postId } })
+            return;
+        }
+
         this.$router.push({ path: '/PostDetails', query: { postId: this.post.postId } })
     }
     }

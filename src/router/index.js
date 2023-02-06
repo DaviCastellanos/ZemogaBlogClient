@@ -3,6 +3,7 @@ import PublishedPosts from '@/components/PublishedPosts.vue'
 import PostDetails from '@/components/PostDetails.vue'
 import CreatePost from '@/components/CreateNewPost.vue'
 import MyPosts from '@/components/MyPosts.vue'
+import EditPost from '@/components/EditPost.vue'
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/MyPosts',
         name: 'MyPosts',
         component: MyPosts
+    },
+    {
+        path: '/EditPost',
+        name: 'EditPost',
+        component: EditPost
     },
 ]
 
