@@ -4,14 +4,14 @@ import { PublicClientApplication } from '@azure/msal-browser';
 export default createStore({
   state () {
     return {
-        userRole: String,
+        userRoles: String,
         accesToken: Object,
         account: undefined,
     }
     },
   getters: {
-    userRole(state) {
-        return state.userRole;
+    userRoles(state) {
+        return state.userRoles;
     },
     accesToken(state) {
         return state.accessToken;
@@ -24,12 +24,10 @@ export default createStore({
     }
     },
   mutations: {
-    SET_USER_ROLE(state, userRole) {
-      this.state.userRole = userRole;
+    SET_USER(state, silentResult) {
+        this.state.accessToken = silentResult;
+        this.state.userRoles = silentResult.idTokenClaims.roles; 
     },
-    SET_ACCESS_TOKEN(state, userRole) {
-        this.state.userRole = userRole;
-    }
     },
   actions: {
     async innitMsal(obj, clientId) {
@@ -44,21 +42,24 @@ export default createStore({
               }
             );
             
-            const accounts = this.$msalInstance.getAllAccounts();
+        const accounts = this.$msalInstance.getAllAccounts();
 
-            if (accounts.length == 0) {
-                return;
-            }
+        //console.log("accounts", accounts);
             
-            this.state.account = accounts[0];
-            
-            const silentRequest = {
-                    scopes: ['profile'],
-                    account: this.state.account
-                };
-            const silentResult = await this.$msalInstance.acquireTokenSilent(silentRequest);
-            this.state.accessToken = silentResult;
-        },
+        if (accounts.length == 0) {
+            return;
+        }
+        
+        this.state.account = accounts[0];
+        
+        const silentRequest = {
+            scopes: ['profile'],
+            account: this.state.account
+        };
+        const silentResult = await this.$msalInstance.acquireTokenSilent(silentRequest);
+        
+        this.commit('SET_USER', silentResult)
+    },
     async signIn() {
         await this.$msalInstance
             .loginPopup({})
@@ -78,7 +79,7 @@ export default createStore({
 
         const silentResult = await this.$msalInstance.acquireTokenSilent(silentRequest);
 
-        this.state.accessToken = silentResult;    
+        this.commit('SET_USER', silentResult)
         },            
     async signOut(){
         await this.$msalInstance

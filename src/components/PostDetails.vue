@@ -58,7 +58,10 @@ export default {
         this.comments = await CommentsService.getPostCommentsWithoutReviews(this.$route.query.postId)
     },
     onCommentCreated(comment){
-        this.comments.push(comment)
+        if(this.comments)
+            this.comments.push(comment)
+        else
+            this.comments = Array(1).fill(comment)
     }
 },
 mounted(){
