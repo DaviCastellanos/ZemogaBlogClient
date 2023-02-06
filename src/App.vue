@@ -1,7 +1,7 @@
 <template>
 
     <nav class="navbar fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand">Zemoga Blog</a>
+        <span class="navbar-brand " @click="goHome()" >Zemoga Blog</span>
         <span class="greet" v-if="this.account"> {{this.account.name}} </span>
         <button v-if="!this.account" type="button" class="btn btn-outline-light" @click="signIn()">Log In</button>
         <button v-if="this.account" type="button" class="btn btn-outline-light" @click="signOut()">Log Out</button>
@@ -10,7 +10,7 @@
     <div class="d-flex justify-content-center no-gutters">
       <router-view />
     </div>
-    
+
 </template>
 
 <script>
@@ -30,6 +30,9 @@ export default {
     }
   },
   methods:{
+    goHome(){
+      this.$router.push({ path: '/'})
+    },
     async signIn(){
        this.$store.dispatch('signIn')
     },

@@ -1,0 +1,96 @@
+<template>
+    <div v-if="this.post" class="box">
+        <div class="title">
+            {{ this.post.title }}
+        </div>
+        <div class="author">
+            from {{ this.post.authorName }}
+        </div>
+        <br/>
+        <div class="header">
+            {{ this.post.header }}
+        </div>
+        <br/>
+        <div class="body">
+            {{ this.post.body }}
+        </div>
+        <br/>
+        <div class="comments-box">
+            <div>
+            Comments:
+            </div>
+            <div v-show="this.comments" v-for="comment in comments" :key="comment.postId">
+                <CommentView :comment="comment"/>
+            </div>
+
+            <div v-show="!this.comments">
+                <CommentView :comment="null"/>
+            </div>
+
+            <CreateNewComment :postInfo="post" />
+        </div>
+    </div>
+</template>
+    
+<script>
+import PostsService from '@/services/posts-service.js'
+import CommentsService from '@/services/comments-service.js'
+import CommentView from './CommentView.vue'
+import CreateNewComment from './CreateNewComment.vue'
+
+export default {
+    name: 'PostDetails',
+    data() {
+    return {
+        post: undefined,
+        comments: undefined
+    }
+    },
+    components:{
+        CommentView,
+        CreateNewComment
+    },
+    methods:{
+    async getPostDetails(){
+        this.post = await PostsService.getPostById(this.$route.query.postId)
+    },
+    async getPostCommentsWithoutReviews(){
+        this.comments = await CommentsService.getPostCommentsWithoutReviews(this.$route.query.postId)
+    }
+},
+mounted(){
+    this.getPostDetails();
+    this.getPostCommentsWithoutReviews();
+}
+}
+</script>
+
+<style>
+.comments-box{
+    text-align: left;
+    padding: 10;
+}
+.box{
+    padding: 10px;
+}
+.title{
+    font-weight: bold;
+    font-size: large;
+    text-align: left;
+}
+
+.header{
+    font-style: italic;
+    text-align: left;
+}
+
+.body{
+    text-align: left;
+    white-space: pre-wrap;
+}
+.author{
+    font-size: normal;
+    text-align: left;
+}
+</style>
+    
