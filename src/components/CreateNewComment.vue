@@ -18,6 +18,7 @@ export default {
     props: {
     postInfo: undefined,
     },
+    emits: ["onCommentCreated"],
     methods:{
         async saveComment()
         {
@@ -32,6 +33,8 @@ export default {
             }
             
             await CommentsService.createNewComment(body);
+
+            this.$emit("onCommentCreated", body);
 
             this.commentBody = undefined;
         }

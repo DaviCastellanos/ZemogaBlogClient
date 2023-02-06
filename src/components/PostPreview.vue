@@ -7,7 +7,7 @@
             {{ this.header }}
         </div>
         <div class="prev-author">
-            from {{ this.author }}
+            From {{ this.author }}
         </div>
     </div>
 </template>
@@ -46,8 +46,8 @@ export default {
 }
 
 .prev-author{
-    font-size: normal;
-    text-align: right;
+    font-size: small;
+    text-align: left;
 }
 </style>
     

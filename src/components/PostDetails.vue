@@ -27,7 +27,7 @@
                 <CommentView :comment="null"/>
             </div>
 
-            <CreateNewComment :postInfo="post" />
+            <CreateNewComment :postInfo="post" @onCommentCreated="onCommentCreated"/>
         </div>
     </div>
 </template>
@@ -56,6 +56,9 @@ export default {
     },
     async getPostCommentsWithoutReviews(){
         this.comments = await CommentsService.getPostCommentsWithoutReviews(this.$route.query.postId)
+    },
+    onCommentCreated(comment){
+        this.comments.push(comment)
     }
 },
 mounted(){
@@ -71,6 +74,7 @@ mounted(){
     padding: 10;
 }
 .box{
+    width: 100%;
     padding: 10px;
 }
 .title{

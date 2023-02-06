@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column">
+    <div class="body d-flex flex-column">
         <br />
         <div v-for="post in this.posts" :key="post.postId">
             <PostPreview :title="post.title" :author="post.authorName" :header="post.header" :postId="post.postId"/>
@@ -34,5 +34,8 @@ export default {
 </script>
 
 <style>
+.body{
+    width: 100%;
+}
 </style>
     
