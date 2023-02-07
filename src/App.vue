@@ -1,5 +1,6 @@
 <template>
 
+    <div class="background">
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand " @click="goHome()" >Zemoga Blog</span>
@@ -37,7 +38,7 @@
     <div class="d-flex justify-content-center no-gutters">
       <router-view />
     </div>
-
+    </div>
 </template>
 
 <script>

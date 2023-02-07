@@ -3,7 +3,6 @@
         <br />
         <div v-for="post in this.posts" :key="post.postId">
             <PostPreview :post="post"/>
-            <br />
         </div>
     </div>
 </template>

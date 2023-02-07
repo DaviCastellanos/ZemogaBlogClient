@@ -1,5 +1,5 @@
 <template>
-    <div class="box border-top-0 button" @click="goToDetail()">
+    <div class="box border-bottom border-secondary button" @click="goToDetail()">
         <div v-if="this.isPublished" class="date">
             {{ new Date(this.post.datePublished).toDateString()}}
         </div>
@@ -13,7 +13,7 @@
             From {{ this.post.authorName }}
         </div>
         <div v-if="this.isFromAuthor" class="prev-author">
-            Status is: {{ this.statuses[this.post.status] }}
+            Status: {{ this.statuses[this.post.status] }}
         </div>
     </div>
 </template>
