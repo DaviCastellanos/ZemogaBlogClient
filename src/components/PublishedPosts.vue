@@ -25,6 +25,10 @@ export default {
     methods:{
     async InitPosts(){
         this.posts = await PostsService.getPublishedPosts();
+
+        this.posts.sort(function(a,b){
+                    return new Date(b.datePublished) - new Date(a.datePublished);
+                    });
     }
     },
     mounted(){

@@ -1,5 +1,8 @@
 <template>
     <div v-if="this.post" class="box">
+        <div v-if="this.isPublished" class="date">
+            {{ new Date(this.post.datePublished).toDateString() }}
+        </div>
         <div class="title">
             {{ this.post.title }}
         </div>
@@ -49,6 +52,12 @@ export default {
     components:{
         CommentView,
         CreateNewComment
+    },
+    computed:{
+        isPublished(){
+        const isPublished = this.post.status == 2;
+        return isPublished;
+    }
     },
     methods:{
     async getPostDetails(){

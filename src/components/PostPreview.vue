@@ -1,5 +1,8 @@
 <template>
     <div class="box border-top-0 button" @click="goToDetail()">
+        <div v-if="this.isPublished" class="date">
+            {{ new Date(this.post.datePublished).toDateString()}}
+        </div>
         <div class="title">
             {{ this.post.title }}
         </div>
@@ -27,6 +30,12 @@ export default {
     props: {
     post: undefined,
     isFromAuthor: Boolean,
+    },
+    computed:{
+        isPublished(){
+        const isPublished = this.post.status == 2;
+        return isPublished;
+    }
     },
     methods:{
     goToDetail(){
@@ -64,6 +73,11 @@ export default {
 .prev-author{
     font-size: small;
     text-align: left;
+}
+
+.date{
+    font-size: small;
+    text-align: right;
 }
 </style>
     
