@@ -1,6 +1,6 @@
-# zemogablogclient
+# Zemoga Blog Engine
 
-## Blog engine setup
+## System setup
 
 The client is a vue.js static app running at: https://orange-island-018104a0f.2.azurestaticapps.net/
 
