@@ -6,6 +6,12 @@
         <br/>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="12" v-model="body"></textarea>
         <br/>
+        <div class="comment-box" v-show="this.comments">
+            Editor feedback:
+            <div v-for="comment in comments" :key="comment.postId">
+                    <CommentView :comment="comment"/>
+            </div>
+        </div>
         <div v-show="!this.comments">
                 <CommentView :comment="null"/>
         </div>
@@ -59,13 +65,15 @@ export default {
                 id: this.$route.query.postId
             }
 
-            console.log("updating post", body)
+            //console.log("updating post", body)
             
             await PostsService.updatePost(body, this.$store.getters.userRoles, this.$store.getters.accesToken);
 
             this.title = undefined;
             this.header = undefined;
             this.body = undefined;
+
+            this.$router.push({ path: '/MyPosts' })
         },
         async getPostDetails(){
             this.post = await PostsService.getPostById(this.$route.query.postId)
@@ -86,8 +94,8 @@ mounted(){
 </script>
 
 <style>
-.body{
+.comment-box{
     font-size: normal;
-    text-align: center;
+    text-align: left;
 }
 </style>
