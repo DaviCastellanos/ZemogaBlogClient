@@ -19,7 +19,7 @@ export default {
   },
   async getPostsByAuthor(id, roles, token) {
 
-    var role = roles[0];
+    var role = roles.filter(x => x=="Task.Write").toString();
     let config = {
         headers: {
           Roles: role,
@@ -35,21 +35,20 @@ export default {
   },
   async createNewPost(payload, roles, token){
 
-    var role = roles[0];
-    //console.log("Token", token);
+    var role = roles.filter(x => x=="Task.Write");
     let config = {
         headers: {
-          Roles: role,
-          Authorization: `Bearer ${token}` 
+            Roles: role,
+            Authorization: `Bearer ${token}` 
         }
-      }
-
+    }
+     
     const response = await postsHandler.postRequest("https://zemogablogapi.azurewebsites.net/api/v1/CreateNewPost", payload, config);
     return response
   },
   async updatePost(payload, roles, token){
 
-    var role = roles[1];
+    var role = roles.filter(x => x=="Task.Write").toString();
     //console.log("Token", token);
     let config = {
         headers: {
@@ -61,20 +60,22 @@ export default {
     const response = await axios.put("https://zemogablogapi.azurewebsites.net/api/v1/UpdatePost", payload, config);
     return response.data
   },
-  async updatePostStatus(id, roles, token){
+  async publishPost(id, roles, token){
 
-    var role = roles[1];
+    var role = roles.filter(x => x=="Task.Edit").toString();
+
     let config = {
         headers: {
             Roles: role,
             Authorization: `Bearer ${token}` 
         }
     }
+
     console.log("config", config);
 
     const url = "https://zemogablogapi.azurewebsites.net/api/v1/PublishPost?postId=" + id;
 
-    const response = await axios.put(url, config);
+    const response = await axios.put(url, null, config);
     return response.data
   }
 }

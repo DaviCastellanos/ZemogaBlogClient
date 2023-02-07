@@ -55,7 +55,7 @@ export default {
     async savePost(status)
     {
         if(status === "Published") {
-            await PostsService.publishPostStatus(this.$route.query.postId,this.$store.getters.userRoles, this.$store.getters.accesToken);
+            await PostsService.publishPost(this.$route.query.postId,this.$store.getters.userRoles, this.$store.getters.accesToken);
             this.$router.push({ path: '/' })
             return;
         }
