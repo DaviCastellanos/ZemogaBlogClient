@@ -17,6 +17,7 @@ export default {
     },
     props: {
     postInfo: undefined,
+    isReview: Boolean
     },
     emits: ["onCommentCreated"],
     methods:{
@@ -29,7 +30,7 @@ export default {
                 body: this.commentBody,
                 postId: this.postInfo.postId,
                 postAuthorId: this.postInfo.authorId,
-                isReview: false
+                isReview: this.isReview
             }
             
             await CommentsService.createNewComment(body);

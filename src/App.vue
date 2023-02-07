@@ -22,8 +22,11 @@
               <li class="nav-item">
                   <span role="button" class="nav-link" @click=" this.$router.push({ path: '/MyPosts'})">My posts</span>
               </li>
+              <li class="nav-item" v-if="this.$store.getters.userIsEditor">
+                  <span role="button" class="nav-link" @click=" this.$router.push({ path: '/ToPublish'})">To publish</span>
+              </li>
               <li class="nav-item">
-                  <span role="button" class="nav-link" @click="signOut()">Sign Out</span>
+                  <span role="button" class="nav-link" @click="signOut()">Sign out</span>
               </li>
             </ul>
           </div>

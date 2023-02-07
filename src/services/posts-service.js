@@ -8,6 +8,10 @@ export default {
     const response = await postsHandler.getRequest("https://zemogablogapi.azurewebsites.net/api/v1/GetPostsByStatus?status=Published");
     return response
   },
+  async getSubmittedPosts() {
+    const response = await postsHandler.getRequest("https://zemogablogapi.azurewebsites.net/api/v1/GetPostsByStatus?status=Submitted");
+    return response
+  },
   async getPostById(id) {
     const url = "https://zemogablogapi.azurewebsites.net/api/v1/GetPostById?postId=" + id;
     const response = await postsHandler.getRequest(url);
@@ -45,7 +49,7 @@ export default {
   },
   async updatePost(payload, roles, token){
 
-    var role = roles[0];
+    var role = roles[1];
     //console.log("Token", token);
     let config = {
         headers: {
@@ -55,6 +59,22 @@ export default {
       }
 
     const response = await axios.put("https://zemogablogapi.azurewebsites.net/api/v1/UpdatePost", payload, config);
+    return response.data
+  },
+  async updatePostStatus(id, roles, token){
+
+    var role = roles[1];
+    let config = {
+        headers: {
+            Roles: role,
+            Authorization: `Bearer ${token}` 
+        }
+    }
+    console.log("config", config);
+
+    const url = "https://zemogablogapi.azurewebsites.net/api/v1/PublishPost?postId=" + id;
+
+    const response = await axios.put(url, config);
     return response.data
   }
 }

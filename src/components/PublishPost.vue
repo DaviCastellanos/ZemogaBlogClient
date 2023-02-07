@@ -17,26 +17,27 @@
         <br/>
         <div class="comments-box">
             <div>
-            Comments:
+            Editor feedback:
             </div>
             <div v-show="this.comments" v-for="comment in comments" :key="comment.postId">
                 <CommentView :comment="comment"/>
             </div>
 
-            <div v-show="!this.comments">
-                <CommentView :comment="null"/>
-            </div>
-
-            <CreateNewComment :postInfo="post" :isReview="false" @onCommentCreated="onCommentCreated"/>
+            <CreateNewComment :postInfo="post" :isReview="true" @onCommentCreated="onCommentCreated"/>
+        </div>
+        <div class="row">
+            <button type="button" class="col-2 btn btn-outline-dark" style="margin:5px;" @click="savePost('WIP')">Reject</button>
+            <button type="button" class="col-2 btn btn-dark" style="margin:5px;" @click="savePost('Published')">Publish</button>
         </div>
     </div>
 </template>
     
 <script>
 import PostsService from '@/services/posts-service.js'
-import CommentsService from '@/services/comments-service.js'
 import CommentView from './CommentView.vue'
 import CreateNewComment from './CreateNewComment.vue'
+import CommentsService from '@/services/comments-service.js'
+
 
 export default {
     name: 'PostDetails',
@@ -51,11 +52,30 @@ export default {
         CreateNewComment
     },
     methods:{
+    async savePost(status)
+    {
+        if(status === "Published") {
+            await PostsService.publishPostStatus(this.$route.query.postId,this.$store.getters.userRoles, this.$store.getters.accesToken);
+            this.$router.push({ path: '/' })
+            return;
+        }
+
+        const body = {
+            title: this.post.title,
+            header: this.post.header,
+            body: this.post.body,
+            status: status,
+            id: this.$route.query.postId
+        }
+        
+        await PostsService.updatePost(body, this.$store.getters.userRoles, this.$store.getters.accesToken);
+        this.$router.push({ path: '/ToPublish' })
+    },
     async getPostDetails(){
         this.post = await PostsService.getPostById(this.$route.query.postId)
     },
-    async getPostCommentsWithoutReviews(){
-        this.comments = await CommentsService.getPostCommentsWithoutReviews(this.$route.query.postId)
+    async getPostReviews(){
+        this.comments = await CommentsService.getPostReviews(this.$route.query.postId)
     },
     onCommentCreated(comment){
         if(this.comments)
@@ -66,7 +86,7 @@ export default {
 },
 mounted(){
     this.getPostDetails();
-    this.getPostCommentsWithoutReviews();
+    this.getPostReviews();
 }
 }
 </script>

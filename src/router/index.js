@@ -4,6 +4,9 @@ import PostDetails from '@/components/PostDetails.vue'
 import CreatePost from '@/components/CreateNewPost.vue'
 import MyPosts from '@/components/MyPosts.vue'
 import EditPost from '@/components/EditPost.vue'
+import ToPublish from '@/components/ToPublish.vue'
+import PublishPost from '@/components/PublishPost.vue'
+
 
 const routes = [
     {
@@ -30,6 +33,16 @@ const routes = [
         path: '/EditPost',
         name: 'EditPost',
         component: EditPost
+    },
+    {
+        path: '/ToPublish',
+        name: 'ToPublish',
+        component: ToPublish
+    },
+    {
+        path: '/PublishPost',
+        name: 'PublishPost',
+        component: PublishPost
     },
 ]
 

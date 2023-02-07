@@ -35,6 +35,11 @@ export default {
             return;
         }
 
+        if(this.$store.getters.userIsEditor && this.post.status === 1){
+            this.$router.push({ path: '/PublishPost', query: { postId: this.post.postId } })
+            return;
+        }
+
         this.$router.push({ path: '/PostDetails', query: { postId: this.post.postId } })
     }
     }

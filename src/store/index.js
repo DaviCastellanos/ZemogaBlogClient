@@ -29,6 +29,18 @@ export default createStore({
     },
     account (state){
         return state.account;
+    },
+    userIsEditor(state){
+        if(state.userRoles)
+            return state.userRoles.includes("Task.Edit")
+        
+        return false;    
+    },
+    userIsWriter(state){
+        if(state.userRoles)
+            return state.userRoles.includes("Task.Write")
+        
+        return false;    
     }
     },
   mutations: {
