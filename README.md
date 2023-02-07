@@ -37,7 +37,7 @@ GetCommentsByPostId (No need for authorization)
 Further operation's details can be found on the Postman collection saved in the API repository: https://github.com/DaviCastellanos/ZemogaBlogAPI
 
 ### Time
-It took about 40 hours to put this system together. 
+It took about 40 hours to put this solution together. 
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
