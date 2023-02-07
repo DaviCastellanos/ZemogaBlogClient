@@ -21,7 +21,7 @@ export default {
     name: 'PostPreview',
     data(){
         return {
-            statuses: ['Wip','Submitted','published']
+            statuses: ['Wip','Submitted','Published']
         }
     },
     props: {

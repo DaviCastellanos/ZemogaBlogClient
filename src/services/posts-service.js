@@ -42,5 +42,19 @@ export default {
 
     const response = await postsHandler.postRequest("https://zemogablogapi.azurewebsites.net/api/v1/CreateNewPost", payload, config);
     return response
+  },
+  async updatePost(payload, roles, token){
+
+    var role = roles[0];
+    //console.log("Token", token);
+    let config = {
+        headers: {
+          Roles: role,
+          Authorization: `Bearer ${token}` 
+        }
+      }
+
+    const response = await axios.put("https://zemogablogapi.azurewebsites.net/api/v1/UpdatePost", payload, config);
+    return response.data
   }
 }

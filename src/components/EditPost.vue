@@ -56,12 +56,12 @@ export default {
                 header: this.header,
                 body: this.body,
                 status: status,
-                authorId: this.$store.getters.userId,
-                authorName: this.$store.getters.userName,
-                version: this.post.version + 1
+                id: this.$route.query.postId
             }
+
+            console.log("updating post", body)
             
-            await PostsService.createNewPost(body, this.$store.getters.userRoles, this.$store.getters.accesToken);
+            await PostsService.updatePost(body, this.$store.getters.userRoles, this.$store.getters.accesToken);
 
             this.title = undefined;
             this.header = undefined;
@@ -73,8 +73,6 @@ export default {
             this.title = this.post.title;
             this.header = this.post.header;
             this.body = this.post.body;
-
-            console.log("title is ", this.title);
         },
         async getPostReviews(){
             this.comments = await CommentsService.getPostReviews(this.$route.query.postId)
