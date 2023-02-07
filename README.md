@@ -20,7 +20,7 @@ Password: Zemog@1234
 Email: zemogaeditor@gmail.com
 Password: Zemog@1234
 
-Before logging into the client with the email address, open the gmail inbox of the user, an email with a code will be sent. That code is requiered to log in with the user's email address.
+Before logging into the client with the email address, open the gmail inbox of the user, an email with a code will be sent. That code is required to log in with the user's email address.
 
 ### API operations
 
